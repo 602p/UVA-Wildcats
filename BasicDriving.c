@@ -4,6 +4,13 @@
 #pragma config(Motor  , mtr_S1_C1_2 , motor2  , tmotorTetrix           , openLoop ,       )
 //Setup Motors^
 
+//========================================//
+//This TeleOp code allows for driving the //
+//robot using the Y axis of ONE controller//
+//thingy. Can be used with samantha or    //
+//wired directly.                         //
+//========================================//
+
 //Allow Use Of Joysticks:
 #pragma  debuggerWindows("joystickSimple");
 #include "JoystickDriver.c"
