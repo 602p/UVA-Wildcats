@@ -2,10 +2,10 @@
 #pragma config(Sensor,  S1         ,           , sensorI2CMuxController                     )
 #pragma config(Motor ,  mtr_S1_C1_1, leftDrive , tmotorTetrix          , openLoop, reversed )
 #pragma config(Motor ,  mtr_S1_C1_2, rightDrive, tmotorTetrix          , openLoop           )
-#pragma config(Motor ,  mtr_S1_C3_2, arm       , tmotorTetrix          , openLoop           )
-#pragma config(Motor ,  mtr_S1_C2_2, elbow     , tmotorTetrix          , openLoop           )
-#pragma config(Motor ,  mtr_S1_C3_1, spinner   , tmotorTetrix          , openLoop           )
-#pragma config(Motor ,  mtr_S1_C2_1, gripper   , tmotorTetrix          , openLoop           )
+#pragma config(Motor ,  mtr_S1_C2_2, arm       , tmotorTetrix          , openLoop           )
+#pragma config(Motor ,  mtr_S1_C3_2, elbow     , tmotorTetrix          , openLoop           )
+#pragma config(Motor ,  mtr_S1_C2_1, spinner   , tmotorTetrix          , openLoop           )
+#pragma config(Motor ,  mtr_S1_C3_1, gripper   , tmotorTetrix          , openLoop           )
 //Setup Motors^
 
 //For control mappings refer to /notes.txt
@@ -35,8 +35,49 @@ task main(){
 			}
 		}
 
-		{
-			
+		{ // Hat control
+			if (joystick.joy1_TopHat==0 || joystick.joy1_TopHat==1 || joystick.joy1_TopHat==7){ // Arm Forward
+				motor[arm]=75;
+			}else{
+				if (joystick.joy1_TopHat==4 || joystick.joy1_TopHat==3 || joystick.joy1_TopHat==5){ // Arm Backward
+					motor[arm]=-75;
+				}else{
+					motor[arm]=0;
+				}
+			}
+			if (joystick.joy1_TopHat==2 || joystick.joy1_TopHat==3 || joystick.joy1_TopHat==1){ // Elbow forward
+				motor[elbow]=75;
+			}else{
+				if (joystick.joy1_TopHat==6 || joystick.joy1_TopHat==7 || joystick.joy1_TopHat==5){ // Elbow backward
+					motor[elbow]=-75;
+				}else{
+					motor[elbow]=0;
+				}
+			}
+		}
+
+		{ // Spinner control
+			if (joy1Btn(0)==1){
+				motor[spinner]=75;
+			}else{
+				if (joy1Btn(1)==1){
+					motor[spinner]=-75;
+				}else{
+					motor[spinner]=0;
+				}
+			}
+		}
+
+		{ // Gripper control
+			if (joy1Btn(2)==1){
+				motor[gripper]=75;
+			}else{
+				if (joy1Btn(3)==1){
+					motor[gripper]=-75;
+				}else{
+					motor[gripper]=0;
+				}
+			}
 		}
 	}
 }
